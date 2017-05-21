@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
-
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
   render() {
-    const { counter } = this.props;
     return (
-      <div>
-        <Link to="/home">
-          Home
-        </Link>
-        <Link to="/graphs">
-          Graphs
-        </Link>
-      </div>
+      <header className="navbar navbar-inverse">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <div className="navbar-brand">
+              Earthquaker
+            </div>
+          </div>
+          <div className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li>
+                <NavLink to="/home" activeClassName="active">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/graphs" activeClassName="active">
+                  Graphs
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
     );
   }
 }
