@@ -16,10 +16,10 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Route path='/' component={App}>
-        <Route path="/home" component={Home} />
+      <App>
+        <Route exact={true} path="/" component={Home} />
         <Route path="/graphs" component={Graphs} />
-      </Route>
+      </App>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
