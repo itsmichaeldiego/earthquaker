@@ -11,15 +11,11 @@ const mapStateToProps = (state, params) => {
 
 class Home extends Component {
   render() {
-    const { isFetching, data } = this.props.data;
+    const { data } = this.props.data;
+    console.log(data);
     return (
       <div>
-        <h1>
-          {isFetching ? 'Loading...' : 'Loaded!!: '}
-        </h1>
-        <div>
-          {JSON.stringify(data)}
-        </div>
+        Home
       </div>
     );
   }

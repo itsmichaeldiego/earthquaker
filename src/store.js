@@ -11,7 +11,6 @@ const store = createStore(
   )
 );
 
-store.dispatch(fetchData())
-.then(() => console.log(store.getState()));
+store.dispatch(fetchData());
 
 export default store;

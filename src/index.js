@@ -9,7 +9,7 @@ import App from './App';
 import Home from './Home';
 import Graphs from './Graphs';
 
-import './index.css';
+import './styles/index.css';
 
 import registerServiceWorker from './registerServiceWorker';
 

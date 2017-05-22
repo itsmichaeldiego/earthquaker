@@ -1,12 +1,12 @@
 import fetch from 'isomorphic-fetch';
 
-const URL = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson`;
+const URL = `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson`;
 
 export const REQUEST_DATA = 'REQUEST_DATA';
 function requestData(data) {
   return {
     type: REQUEST_DATA,
-    data
+    data: data
   }
 }
 
@@ -14,8 +14,7 @@ export const RECEIVE_DATA = 'RECEIVE_DATA';
 function receiveData(data) {
   return {
     type: RECEIVE_DATA,
-    data,
-    receivedAt: Date.now()
+    data: data
   }
 }
 

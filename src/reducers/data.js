@@ -1,14 +1,13 @@
 const initialState = {
   isFetching: false,
-  data: []
+  data: {}
 };
 
 function dataReducer(state = initialState, action) {
   switch (action.type) {
     case 'REQUEST_DATA':
       return Object.assign({}, state, {
-        isFetching: true,
-        didInvalidate: false
+        isFetching: true
       });
     case 'RECEIVE_DATA':
       return Object.assign({}, state, {
