@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
+import { fetchData } from './actions/fetchData'
 import reducers from './reducers';
 
 const store = createStore(
@@ -9,5 +10,8 @@ const store = createStore(
     thunkMiddleware
   )
 );
+
+store.dispatch(fetchData())
+.then(() => console.log(store.getState()));
 
 export default store;
