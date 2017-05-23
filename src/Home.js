@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GoogleMapReact from 'google-map-react';
 
 import store from './store';
 
 import Sidebar from './components/Sidebar';
-import MapMark from './components/MapMark';
+import Map from './components/Map';
 
 const MAX = 20;
 
@@ -65,38 +64,9 @@ class Home extends Component {
     })
   }
 
-  renderMarkers(earthquakes) {
-    return earthquakes.map(function(earthquake, index) {
-      return (
-        <MapMark
-          key={index}
-          lat={earthquake.geometry.coordinates[1]}
-          lng={earthquake.geometry.coordinates[0]}
-          title={earthquake.properties.title}
-          magnitude={earthquake.properties.mag}
-        />
-      )
-    });
-  }
-
-  renderMap(earthquakes) {
-    const { center } = this.state;
-    return (
-      <div className="c-map">
-        <GoogleMapReact
-          center={center}
-          defaultZoom={0}
-          maxZoom={100}
-          minZoom={0}
-        >
-          {this.renderMarkers(earthquakes)}
-        </GoogleMapReact>
-      </div>
-    )
-  }
-
   render() {
     const { data } = this.props.data;
+    const { center } = this.state;
 
     if (!data.features) {
       return null;
@@ -115,11 +85,14 @@ class Home extends Component {
     return (
       <section className="c-home">
         <Sidebar
-          lastEarthquakes={lastEarthquakes}
+          earthquakes={lastEarthquakes}
           significantEarthQuakes={significantEarthQuakes}
           handleClick={this.handleClick.bind(this)}
         />
-        {this.renderMap(lastEarthquakes)}
+        <Map
+          earthquakes={lastEarthquakes}
+          center={center}
+        />
       </section>
     );
   }

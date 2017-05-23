@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class Sidebar extends Component {
   renderSidebarItems() {
-    const {lastEarthquakes, handleClick} = this.props;
-    return lastEarthquakes.map((earthquake, index) => {
+    const {earthquakes, handleClick} = this.props;
+    return earthquakes.map((earthquake, index) => {
       return (
         <a href="#"
           key={index}
@@ -30,7 +30,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const {lastEarthquakes, significantEarthQuakes} = this.props;
+    const {earthquakes, significantEarthQuakes} = this.props;
     return (
       <div className="c-sidebar list-group">
         <div className="list-group-item">
@@ -39,7 +39,7 @@ class Sidebar extends Component {
           </h3>
           <p className="list-group-item-text">
             {`${significantEarthQuakes.length}
-              of ${lastEarthquakes.length} were above 4.5 magnitude.`}
+              of ${earthquakes.length} were above 4.5 magnitude.`}
           </p>
         </div>
         {this.renderSidebarItems()}
