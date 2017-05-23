@@ -11,7 +11,6 @@ const mapStateToProps = (state, params) => {
 
 class Graphs extends Component {
   render() {
-    const { data } = this.props.data;
     return (
       <div className="container">
         <h1>Graphs, coming soon...</h1>

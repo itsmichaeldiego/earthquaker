@@ -2,18 +2,18 @@ import fetch from 'isomorphic-fetch';
 
 const URL = `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson`;
 
-export const REQUEST_DATA = 'REQUEST_DATA';
+export const REQUEST_EARTHQUAKES = 'REQUEST_EARTHQUAKES';
 function requestData(data) {
   return {
-    type: REQUEST_DATA,
+    type: REQUEST_EARTHQUAKES,
     data: data
   }
 }
 
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const RECEIVE_EARTHQUAKES = 'RECEIVE_EARTHQUAKES';
 function receiveData(data) {
   return {
-    type: RECEIVE_DATA,
+    type: RECEIVE_EARTHQUAKES,
     data: data
   }
 }

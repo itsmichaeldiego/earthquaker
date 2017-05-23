@@ -6,7 +6,7 @@ import store from '../store';
 
 const mapStateToProps = (state, params) => {
   return {
-    isFetching: store.getState().data.isFetching
+    isFetching: store.getState().earthquakes.isFetching
   };
 };
 

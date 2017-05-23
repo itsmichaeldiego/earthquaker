@@ -32,7 +32,7 @@ const getEarthquakes = (earthquakes, filter) => {
 
 const mapStateToProps = (state, params) => {
   return {
-    data: store.getState().data
+    earthquakes: store.getState().earthquakes
   };
 };
 
@@ -60,15 +60,15 @@ class Home extends Component {
   }
 
   render() {
-    const { data } = this.props.data;
+    const { earthquakes } = this.props.earthquakes;
     const { center, activeEarthquakeName } = this.state;
 
-    if (!data.features) {
+    if (earthquakes.length === 0) {
       return null;
     }
 
     const lastEarthquakes = getEarthquakes(
-      data.features,
+      earthquakes,
       'SHOW_LAST'
     );
 

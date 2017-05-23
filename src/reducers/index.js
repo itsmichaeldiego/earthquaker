@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import dataReducer from './data';
+import earthquakesReducer from './earthquakes';
 
 export default combineReducers({
-  data: dataReducer
+  earthquakes: earthquakesReducer
 });

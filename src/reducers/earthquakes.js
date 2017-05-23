@@ -1,22 +1,22 @@
 const initialState = {
   isFetching: false,
-  data: {}
+  earthquakes: []
 };
 
-function dataReducer(state = initialState, action) {
+function earthquakesReducer(state = initialState, action) {
   switch (action.type) {
-    case 'REQUEST_DATA':
+    case 'REQUEST_EARTHQUAKES':
       return Object.assign({}, state, {
         isFetching: true
       });
-    case 'RECEIVE_DATA':
+    case 'RECEIVE_EARTHQUAKES':
       return Object.assign({}, state, {
         isFetching: false,
-        data: action.data
+        earthquakes: action.data.features
       });
     default:
       return state;
   }
 }
 
-export default dataReducer;
+export default earthquakesReducer;
