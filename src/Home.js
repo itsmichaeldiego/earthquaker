@@ -9,7 +9,8 @@ import MapMark from './components/MapMark';
 const isToday = (date) => {
   const today = new Date();
   const currentDate = new Date(date);
-  return currentDate.setHours(0,0,0,0) === today.setHours(0,0,0,0);
+  const yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+  return (currentDate >= yesterday && currentDate < today);
 }
 
 const getEarthquakes = (earthquakes, filter) => {
@@ -21,7 +22,7 @@ const getEarthquakes = (earthquakes, filter) => {
              .filter(e => isToday(e.properties.time));
     case 'SHOW_LAST_SIGNIFICANT':
       return earthquakes
-             .filter(e => isToday(e.properties.time) && e.properties.mag >= 2.5);
+             .filter(e => isToday(e.properties.time) && e.properties.mag >= 4.5);
     default:
       return earthquakes;
   }
@@ -62,15 +63,17 @@ class Home extends Component {
           className="list-group-item list-group-item-action u-flex u-flex-center"
           onClick={(ev) => this.handleClick(ev, earthquake)}
         >
-          <h5 className="col-md-3 u-txt-align-center">
+          <h4 className="col-md-3 u-txt-align-center">
             {earthquake.properties.mag}
-          </h5>
+          </h4>
           <div className="u-flex u-flex-direction-column col-md-9">
             <h5>
               {earthquake.properties.place}
             </h5>
             <p>
               {(new Date(earthquake.properties.time)).toDateString()}
+              <br/>
+              {(new Date(earthquake.properties.time)).toLocaleTimeString()}
             </p>
             <small>
               {`${earthquake.geometry.coordinates[2]}km`}
@@ -90,7 +93,7 @@ class Home extends Component {
           </h3>
           <p className="list-group-item-text">
             {`${significantEarthQuakes.length}
-              of ${earthquakes.length} were above 2.5 magnitude.`}
+              of ${earthquakes.length} were above 4.5 magnitude.`}
           </p>
         </div>
         {this.renderSidebarItems(earthquakes)}
@@ -106,6 +109,7 @@ class Home extends Component {
           lat={earthquake.geometry.coordinates[1]}
           lng={earthquake.geometry.coordinates[0]}
           title={earthquake.properties.title}
+          magnitude={earthquake.properties.mag}
         />
       )
     });

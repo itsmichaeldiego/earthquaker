@@ -10,6 +10,10 @@
   background-color: var(--color-white);
 }
 
+.c-map__mark--warning {
+  background-color: var(--color-orange);
+}
+
 .c-map__mark--alert {
   background-color: var(--color-red);
 }
