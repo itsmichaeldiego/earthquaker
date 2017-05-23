@@ -16,8 +16,12 @@ const getEarthquakes = (earthquakes, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
       return earthquakes;
-    case 'SHOW_LATEST':
-      return earthquakes.filter(e => isToday(e.properties.time));
+    case 'SHOW_LAST':
+      return earthquakes
+             .filter(e => isToday(e.properties.time));
+    case 'SHOW_LAST_SIGNIFICANT':
+      return earthquakes
+             .filter(e => isToday(e.properties.time) && e.properties.mag >= 2.5);
     default:
       return earthquakes;
   }
@@ -40,6 +44,60 @@ class Home extends Component {
     }
   }
 
+  handleClick(ev, earthquake) {
+    ev.preventDefault();
+    this.setState({
+      center: {
+        lat: earthquake.geometry.coordinates[1],
+        lng: earthquake.geometry.coordinates[0]
+      }
+    })
+  }
+
+  renderSidebarItems(earthquakes) {
+    return earthquakes.map((earthquake, index) => {
+      return (
+        <a href="#"
+          key={index}
+          className="list-group-item list-group-item-action u-flex u-flex-center"
+          onClick={(ev) => this.handleClick(ev, earthquake)}
+        >
+          <h5 className="col-md-3">
+            {earthquake.properties.mag}
+          </h5>
+          <div className="u-flex u-flex-direction-column col-md-9">
+            <h5>
+              {earthquake.properties.place}
+            </h5>
+            <p>
+              {(new Date(earthquake.properties.time)).toDateString()}
+            </p>
+            <small>
+              {`${earthquake.geometry.coordinates[2]}km`}
+            </small>
+          </div>
+        </a>
+      );
+    });
+  }
+
+  renderSidebar(earthquakes, significantEarthQuakes) {
+    return (
+      <div className="c-sidebar list-group">
+        <div className="list-group-item">
+          <h3 className="list-group-item-heading">
+            Today's earthquakes.
+          </h3>
+          <p className="list-group-item-text">
+            {`${significantEarthQuakes.length}
+              of ${earthquakes.length} were above 2.5 magnitude.`}
+          </p>
+        </div>
+        {this.renderSidebarItems(earthquakes)}
+      </div>
+    )
+  }
+
   renderMarkers(earthquakes) {
     return earthquakes.map(function(earthquake, index) {
       return (
@@ -53,36 +111,44 @@ class Home extends Component {
     });
   }
 
-  renderMap() {
+  renderMap(earthquakes) {
     const { center } = this.state;
+    return (
+      <div className="c-map">
+        <GoogleMapReact
+          center={center}
+          defaultZoom={0}
+          maxZoom={100}
+          minZoom={0}
+        >
+          {this.renderMarkers(earthquakes)}
+        </GoogleMapReact>
+      </div>
+    )
+  }
+
+  render() {
     const { data } = this.props.data;
 
     if (!data.features) {
       return null;
     }
 
-    const earthquakes = getEarthquakes(
+    const lastEarthquakes = getEarthquakes(
       data.features,
-      'SHOW_LATEST'
+      'SHOW_LAST'
+    );
+
+    const significantEarthQuakes = getEarthquakes(
+      data.features,
+      'SHOW_LAST_SIGNIFICANT'
     );
 
     return (
-      <GoogleMapReact
-        defaultCenter={center}
-        defaultZoom={0}
-        maxZoom={100}
-        minZoom={0}
-      >
-        {this.renderMarkers(earthquakes)}
-      </GoogleMapReact>
-    )
-  }
-
-  render() {
-    return (
-      <div className="c-map">
-        {this.renderMap()}
-      </div>
+      <section className="c-home">
+        {this.renderSidebar(lastEarthquakes, significantEarthQuakes)}
+        {this.renderMap(lastEarthquakes)}
+      </section>
     );
   }
 }

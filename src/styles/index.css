@@ -6,8 +6,10 @@
 
 /* Components */
 @import './components/header.css';
+@import './components/home.css';
 @import './components/loader.css';
 @import './components/map.css';
+@import './components/sidebar.css';
 
 /* Trumps */
 @import './trumps/utils.css';

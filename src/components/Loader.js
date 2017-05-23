@@ -18,7 +18,7 @@ class Loader extends Component {
     return (
       <div>
         <div id="loader"
-          className="modal fade in u-flex u-items-center"
+          className="modal fade in u-flex u-items-center u-justify-content-center"
           data-backdrop="static"
           data-keyboard="false"
         >
