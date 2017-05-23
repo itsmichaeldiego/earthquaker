@@ -1,6 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class Sidebar extends Component {
+  static propTypes = {
+    earthquakes: PropTypes.array,
+    significantEarthQuakes: PropTypes.array,
+    handleClick: PropTypes.func
+  };
+
   renderSidebarItems() {
     const {earthquakes, handleClick} = this.props;
     return earthquakes.map((earthquake, index) => {

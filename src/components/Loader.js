@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import store from '../store';
@@ -10,6 +10,10 @@ const mapStateToProps = (state, params) => {
 };
 
 class Loader extends Component {
+  static propTypes = {
+    isFetching: PropTypes.bool
+  };
+
   render() {
     const { isFetching } = this.props;
     if (!isFetching) {
