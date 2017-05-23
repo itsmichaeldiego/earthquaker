@@ -6,23 +6,18 @@ import store from './store';
 
 import MapMark from './components/MapMark';
 
-const MIN_MAG = 2.5;
-
-const isToday = (firstDate, secondDate) => {
-  return firstDate.setHours(0,0,0,0) ===
-         secondDate.setHours(0,0,0,0);
+const isToday = (date) => {
+  const today = new Date();
+  const currentDate = new Date(date);
+  return currentDate.setHours(0,0,0,0) === today.setHours(0,0,0,0);
 }
 
 const getEarthquakes = (earthquakes, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
       return earthquakes;
-    case 'SHOW_LATEST_SIGNIFICANT':
-      return earthquakes.filter(function(earthquake, index) {
-        const today = new Date();
-        const date = new Date(earthquake.properties.time);
-        return earthquake.properties.mag >= MIN_MAG && isToday(today, date);
-      });
+    case 'SHOW_LATEST':
+      return earthquakes.filter(e => isToday(e.properties.time));
     default:
       return earthquakes;
   }
@@ -35,26 +30,50 @@ const mapStateToProps = (state, params) => {
 };
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    }
+  }
+
+  renderMarkers(earthquakes) {
+    return earthquakes.map(function(earthquake, index) {
+      return (
+        <MapMark
+          key={index}
+          lat={earthquake.geometry.coordinates[1]}
+          lng={earthquake.geometry.coordinates[0]}
+          title={earthquake.properties.title}
+        />
+      )
+    });
+  }
 
   renderMap() {
+    const { center } = this.state;
     const { data } = this.props.data;
+
     if (!data.features) {
       return null;
     }
+
     const earthquakes = getEarthquakes(
       data.features,
-      'SHOW_LATEST_SIGNIFICANT'
+      'SHOW_LATEST'
     );
-    earthquakes.map(function(earthquake, index) {
-      const date = new Date(earthquake.properties.time);
-      console.log(date);
-    });
+
     return (
       <GoogleMapReact
-        defaultCenter={{lat: 59.95, lng: 30.33}}
-        defaultZoom={11}
+        defaultCenter={center}
+        defaultZoom={0}
+        maxZoom={100}
+        minZoom={0}
       >
-        <MapMark lat={59.95} lng={30.33} />
+        {this.renderMarkers(earthquakes)}
       </GoogleMapReact>
     )
   }
