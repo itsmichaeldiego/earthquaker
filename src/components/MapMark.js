@@ -13,18 +13,23 @@ class MapMark extends Component {
   render() {
     const { earthquake, activeEarthquakeName, handleClick } = this.props;
     const { title, magnitude } = earthquake.properties;
+    const isActive = earthquake.properties.title === activeEarthquakeName;
     const markClassName = cn(
       'c-map__mark',
       magnitude >= 4.5 ? 'c-map__mark--alert' : '',
       this.props.$hover ? 'c-map__mark--hover' : '',
-      earthquake.properties.title === activeEarthquakeName ? 'c-map__mark--hover' : ''
+      isActive ? 'c-map__mark--hover' : ''
     );
+    const style = {
+      zIndex: isActive ? '999' : '0'
+    };
     return (
       <img
         src="img/earthquake-icon.png"
         className={markClassName}
         alt={title}
         onClick={(ev) => handleClick(ev, earthquake)}
+        style={style}
       />
     );
   }

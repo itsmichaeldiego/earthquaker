@@ -10,6 +10,7 @@
   background-color: var(--color-white);
   left: calc((var(--mark-width) * -1) / 2);
   top: calc((var(--mark-width) * -1) / 2);
+  position: absolute;
 }
 
 .c-map__mark--hover {
