@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import store from '../store';
-
 const mapStateToProps = (state, params) => {
   return {
-    isFetching: store.getState().earthquakes.isFetching
+    isFetching: state.earthquakes.isFetching
   };
 };
 

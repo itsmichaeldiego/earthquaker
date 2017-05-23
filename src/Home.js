@@ -32,7 +32,7 @@ const getEarthquakes = (earthquakes, filter) => {
 
 const mapStateToProps = (state, params) => {
   return {
-    earthquakes: store.getState().earthquakes
+    earthquakes: state.earthquakes
   };
 };
 

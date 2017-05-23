@@ -4,11 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import store from '../store';
-
 const mapStateToProps = (state, params) => {
   return {
-    selectedEarthquake: store.getState().earthquakes.selectedEarthquake
+    selectedEarthquake: state.earthquakes.selectedEarthquake
   };
 };
 
