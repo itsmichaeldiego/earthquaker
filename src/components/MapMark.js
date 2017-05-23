@@ -20,7 +20,7 @@ class MapMark extends Component {
 
   isSelected(earthquake) {
     const { selectedEarthquake } = this.props;
-    if (!selectedEarthquake.properties) {
+    if (!selectedEarthquake) {
       return false;
     }
     return earthquake.id === selectedEarthquake.id;
