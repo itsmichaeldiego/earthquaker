@@ -2,3 +2,8 @@
   width: 100%;
   height: calc(100vh - var(--header-height));
 }
+
+.c-map__mark {
+  width: 64px;
+  height: 64px;
+}

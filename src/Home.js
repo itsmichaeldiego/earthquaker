@@ -4,6 +4,8 @@ import GoogleMapReact from 'google-map-react';
 
 import store from './store';
 
+import MapMark from './components/MapMark';
+
 const MIN_MAG = 2.5;
 
 const isToday = (firstDate, secondDate) => {
@@ -52,6 +54,7 @@ class Home extends Component {
         defaultCenter={{lat: 59.95, lng: 30.33}}
         defaultZoom={11}
       >
+        <MapMark lat={59.95} lng={30.33} />
       </GoogleMapReact>
     )
   }
