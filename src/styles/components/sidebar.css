@@ -3,4 +3,5 @@
   height: calc(100vh - var(--header-height));
   background-color: var(--color-white);
   overflow: scroll;
+  margin: 0;
 }
