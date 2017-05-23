@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
   render() {
     return (
-      <header className="navbar navbar-inverse navbar-static-top">
+      <header className="c-header navbar navbar-inverse navbar-static-top">
         <div className="container-fluid">
           <div className="navbar-header">
             <div className="navbar-brand">

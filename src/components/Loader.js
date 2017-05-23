@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import store from '../store';
 
@@ -10,6 +11,10 @@ const mapStateToProps = (state, params) => {
 };
 
 class Loader extends Component {
+  static propTypes = {
+    isFetching: PropTypes.bool
+  };
+
   render() {
     const { isFetching } = this.props;
     if (!isFetching) {
@@ -18,11 +23,11 @@ class Loader extends Component {
     return (
       <div>
         <div id="loader"
-          className="modal fade in u-flex u-items-center"
+          className="modal fade in u-flex u-items-center u-justify-content-center"
           data-backdrop="static"
           data-keyboard="false"
         >
-          <div className="loader">
+          <div className="c-loader">
           </div>
         </div>
         <div className="modal-backdrop fade in"></div>

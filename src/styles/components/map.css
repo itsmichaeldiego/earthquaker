@@ -1,0 +1,23 @@
+.c-map {
+  width: calc(100% - var(--sidebar-width));
+  height: calc(100vh - var(--header-height));
+}
+
+.c-map__mark {
+  width: var(--mark-width);
+  height: var(--mark-width);
+  border-radius: 100%;
+  background-color: var(--color-white);
+  left: calc((var(--mark-width) * -1) / 2);
+  top: calc((var(--mark-width) * -1) / 2);
+  position: absolute;
+}
+
+.c-map__mark--hover {
+  background-color: var(--color-green) !important;
+  cursor: pointer;
+}
+
+.c-map__mark--alert {
+  background-color: var(--color-orange);
+}

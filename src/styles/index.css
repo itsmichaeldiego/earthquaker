@@ -1,6 +1,19 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~bootstrap/dist/css/bootstrap-theme.css';
 
-@import './components/loader.css';
+/* Settings */
+@import './settings/colors.css';
+@import './settings/variables.css';
 
+/* Elements */
+@import './elements/page.css';
+
+/* Components */
+@import './components/header.css';
+@import './components/home.css';
+@import './components/loader.css';
+@import './components/map.css';
+@import './components/sidebar.css';
+
+/* Trumps */
 @import './trumps/utils.css';

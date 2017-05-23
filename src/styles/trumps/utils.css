@@ -2,7 +2,26 @@
   display: flex;
 }
 
-.u-items-center {
+.u-items-center, .u-flex-center {
   align-items: center;
+}
+
+.u-justify-content-center, .u-flex-center {
   justify-content: center;
+}
+
+.u-justify-content-between {
+  justify-content: space-between;
+}
+
+.u-flex-direction-column {
+  flex-direction: column;
+}
+
+.u-txt-align-center {
+  text-align: center;
+}
+
+.u-txt-s-bold {
+  font-weight: 600;
 }
