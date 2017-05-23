@@ -1,6 +1,6 @@
 .c-sidebar {
   width: var(--sidebar-width);
   height: calc(100vh - var(--header-height));
-  background-color: #ffffff;
+  background-color: var(--color-white);
   overflow: scroll;
 }

@@ -4,8 +4,8 @@
 }
 
 .c-map__mark {
-  width: 32px;
-  height: 32px;
+  width: var(--mark-width);
+  height: var(--mark-width);
   border-radius: 100%;
   background-color: var(--color-white);
 }
