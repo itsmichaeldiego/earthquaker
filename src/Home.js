@@ -32,7 +32,7 @@ const getEarthquakes = (earthquakes, filter) => {
 
 const mapStateToProps = (state, params) => {
   return {
-    data: store.getState().data
+    earthquakes: state.earthquakes
   };
 };
 
@@ -43,9 +43,8 @@ class Home extends Component {
       center: {
         lat: 0,
         lng: 0
-      },
-      activeEarthquakeName: null
-    }
+      }
+    };
   }
 
   handleClick(ev, earthquake) {
@@ -54,23 +53,28 @@ class Home extends Component {
       center: {
         lat: earthquake.geometry.coordinates[1],
         lng: earthquake.geometry.coordinates[0]
-      },
-      activeEarthquakeName: earthquake.properties.title
-    })
+      }
+    });
+    store.dispatch({
+      type: 'SELECT_EARTHQUAKE',
+      earthquake: earthquake
+    });
   }
 
   render() {
-    const { data } = this.props.data;
-    const { center, activeEarthquakeName } = this.state;
+    const { earthquakes } = this.props.earthquakes;
+    const { center } = this.state;
 
-    if (!data.features) {
+    if (earthquakes.length === 0) {
       return null;
     }
 
     const lastEarthquakes = getEarthquakes(
-      data.features,
+      earthquakes,
       'SHOW_LAST'
     );
+
+    console.log(lastEarthquakes);
 
     const significantEarthQuakes = getEarthquakes(
       lastEarthquakes,
@@ -82,13 +86,11 @@ class Home extends Component {
         <Sidebar
           earthquakes={lastEarthquakes}
           significantEarthQuakes={significantEarthQuakes}
-          activeEarthquakeName={activeEarthquakeName}
           handleClick={this.handleClick.bind(this)}
         />
         <Map
           earthquakes={lastEarthquakes}
           center={center}
-          activeEarthquakeName={activeEarthquakeName}
           handleClick={this.handleClick.bind(this)}
         />
       </section>

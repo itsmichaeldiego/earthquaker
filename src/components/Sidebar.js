@@ -1,25 +1,40 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+
+const mapStateToProps = (state, params) => {
+  return {
+    selectedEarthquake: state.earthquakes.selectedEarthquake
+  };
+};
 
 class Sidebar extends Component {
   static propTypes = {
     earthquakes: PropTypes.array,
     significantEarthQuakes: PropTypes.array,
     handleClick: PropTypes.func,
-    activeEarthquakeName: PropTypes.string
+    selectedEarthquake: PropTypes.object
   };
 
+  isSelected(earthquake) {
+    const { selectedEarthquake } = this.props;
+    if (!selectedEarthquake) {
+      return false;
+    }
+    return earthquake.id === selectedEarthquake.id;
+  }
+
   renderSidebarItems() {
-    const {earthquakes, handleClick, activeEarthquakeName} = this.props;
+    const {earthquakes, handleClick} = this.props;
     return earthquakes.map((earthquake, index) => {
       const sidebarItemClassName = cn(
         'list-group-item',
         'list-group-item-action',
         'u-flex',
         'u-flex-center',
-        earthquake.properties.title === activeEarthquakeName ? 'active' : ''
+        this.isSelected(earthquake) ? 'active' : ''
       );
       return (
         <a href="#"
@@ -65,4 +80,5 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+const ConnectSidebar = connect(mapStateToProps)(Sidebar);
+export default ConnectSidebar;
