@@ -12,10 +12,9 @@ const mapStateToProps = (state, params) => {
 class Graphs extends Component {
   render() {
     const { data } = this.props.data;
-    console.log(data);
     return (
-      <div>
-        Graphs
+      <div className="container">
+        <h1>Graphs, coming soon...</h1>
       </div>
     );
   }
