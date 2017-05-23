@@ -1,19 +1,37 @@
-@import '~bootstrap/dist/css/bootstrap.css';
-@import '~bootstrap/dist/css/bootstrap-theme.css';
+/*
+  This file is using an architecture of file import following ITCSS:
+  https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+*/
 
-/* Settings */
+
+/*
+  Settings – contain fonts, colors definitions, etc.
+*/
 @import './settings/colors.css';
 @import './settings/variables.css';
 
-/* Elements */
+/* Vendor - separated layer for vendor styles. */
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap/dist/css/bootstrap-theme.css';
+
+/*
+  Elements – styling for bare HTML elements (like H1, A, etc.).
+  These come with default styling from the browser so we can redefine them here.
+*/
 @import './elements/page.css';
 
-/* Components */
+/*
+  Components – specific UI components. This is where majority of our work takes
+  place and our UI components are often composed of Objects and Components
+*/
 @import './components/header.css';
 @import './components/home.css';
 @import './components/loader.css';
 @import './components/map.css';
 @import './components/sidebar.css';
 
-/* Trumps */
+/*
+  Trumps – utilities and helper classes with ability to override anything
+   which goes before in the cascade, eg. hide helper class
+*/
 @import './trumps/utils.css';
