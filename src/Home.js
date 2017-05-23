@@ -8,13 +8,6 @@ import Map from './components/Map';
 
 const MAX = 20;
 
-const isInPast24Hours = (date) => {
-  const today = new Date();
-  const currentDate = new Date(date);
-  const yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
-  return (currentDate >= yesterday && currentDate < today);
-}
-
 const sortByDate = (a, b) => {
   a = new Date(a.properties.time);
   b = new Date(b.properties.time);
