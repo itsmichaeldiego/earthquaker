@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "google-map-react": "^0.24.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

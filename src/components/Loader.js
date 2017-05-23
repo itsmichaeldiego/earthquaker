@@ -22,7 +22,7 @@ class Loader extends Component {
           data-backdrop="static"
           data-keyboard="false"
         >
-          <div className="loader">
+          <div className="c-loader">
           </div>
         </div>
         <div className="modal-backdrop fade in"></div>

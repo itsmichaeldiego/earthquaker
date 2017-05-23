@@ -1,0 +1,5 @@
+.c-header {
+  margin-bottom: 0;
+  min-width: var(--header-height);
+  border: 0;
+}

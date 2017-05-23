@@ -1,6 +1,13 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~bootstrap/dist/css/bootstrap-theme.css';
 
-@import './components/loader.css';
+/* Settings */
+@import './settings/variables.css';
 
+/* Components */
+@import './components/header.css';
+@import './components/loader.css';
+@import './components/map.css';
+
+/* Trumps */
 @import './trumps/utils.css';

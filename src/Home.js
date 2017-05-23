@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import GoogleMapReact from 'google-map-react';
 
 import store from './store';
 
@@ -46,13 +47,19 @@ class Home extends Component {
       const date = new Date(earthquake.properties.time);
       console.log(date);
     });
+    return (
+      <GoogleMapReact
+        defaultCenter={{lat: 59.95, lng: 30.33}}
+        defaultZoom={11}
+      >
+      </GoogleMapReact>
+    )
   }
 
   render() {
     return (
-      <div>
+      <div className="c-map">
         {this.renderMap()}
-        Home
       </div>
     );
   }
