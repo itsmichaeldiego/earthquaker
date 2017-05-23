@@ -62,7 +62,7 @@ class Home extends Component {
           className="list-group-item list-group-item-action u-flex u-flex-center"
           onClick={(ev) => this.handleClick(ev, earthquake)}
         >
-          <h5 className="col-md-3">
+          <h5 className="col-md-3 u-txt-align-center">
             {earthquake.properties.mag}
           </h5>
           <div className="u-flex u-flex-direction-column col-md-9">

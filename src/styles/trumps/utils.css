@@ -17,3 +17,7 @@
 .u-flex-direction-column {
   flex-direction: column;
 }
+
+.u-txt-align-center {
+  text-align: center;
+}
