@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 import MapMark from './MapMark';
 
 class Map extends Component {
+  static propTypes = {
+    handleClick: PropTypes.func,
+    earthquakes: PropTypes.array,
+    center: PropTypes.object
+  };
+
   renderMarkers(earthquakes) {
+    const { handleClick } = this.props;
     return earthquakes.map(function(earthquake, index) {
       return (
         <MapMark
           key={index}
           lat={earthquake.geometry.coordinates[1]}
           lng={earthquake.geometry.coordinates[0]}
-          title={earthquake.properties.title}
-          magnitude={earthquake.properties.mag}
+          earthquake={earthquake}
+          handleClick={handleClick}
         />
       )
     });

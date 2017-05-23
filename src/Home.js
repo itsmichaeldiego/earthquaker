@@ -92,6 +92,7 @@ class Home extends Component {
         <Map
           earthquakes={lastEarthquakes}
           center={center}
+          handleClick={this.handleClick.bind(this)}
         />
       </section>
     );
