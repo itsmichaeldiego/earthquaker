@@ -6,7 +6,7 @@ import store from './store';
 import Sidebar from './components/Sidebar';
 import Map from './components/Map';
 
-const MAX = 20;
+const MAX_LENGTH = 20;
 
 const sortByDate = (a, b) => {
   a = new Date(a.properties.time);
@@ -20,13 +20,13 @@ const getEarthquakes = (earthquakes, filter) => {
     case 'SHOW_LAST':
       return earthquakes
              .filter(e => e.properties.mag >= 2.5)
-             .slice(0, MAX);
+             .slice(0, MAX_LENGTH);
     case 'SHOW_LAST_SIGNIFICANT':
       return earthquakes
              .filter(e => e.properties.mag >= 4.5)
-             .slice(0, MAX);
+             .slice(0, MAX_LENGTH);
     default:
-      return earthquakes.slice(0, MAX);
+      return earthquakes.slice(0, MAX_LENGTH);
   }
 }
 
@@ -43,7 +43,8 @@ class Home extends Component {
       center: {
         lat: 0,
         lng: 0
-      }
+      },
+      activeEarthquake: null
     }
   }
 
@@ -53,13 +54,14 @@ class Home extends Component {
       center: {
         lat: earthquake.geometry.coordinates[1],
         lng: earthquake.geometry.coordinates[0]
-      }
+      },
+      activeEarthquake: earthquake.properties.title
     })
   }
 
   render() {
     const { data } = this.props.data;
-    const { center } = this.state;
+    const { center, activeEarthquake } = this.state;
 
     if (!data.features) {
       return null;
@@ -80,11 +82,13 @@ class Home extends Component {
         <Sidebar
           earthquakes={lastEarthquakes}
           significantEarthQuakes={significantEarthQuakes}
+          activeEarthquake={activeEarthquake}
           handleClick={this.handleClick.bind(this)}
         />
         <Map
           earthquakes={lastEarthquakes}
           center={center}
+          activeEarthquake={activeEarthquake}
           handleClick={this.handleClick.bind(this)}
         />
       </section>
