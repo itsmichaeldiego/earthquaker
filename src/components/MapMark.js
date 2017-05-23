@@ -7,16 +7,18 @@ class MapMark extends Component {
     // GoogleMap pass $hover props to hovered components
     // to detect hover it uses internal mechanism, explained in x_distance_hover example
     $hover: PropTypes.bool,
-    earthquake: PropTypes.object
+    earthquake: PropTypes.object,
+    activeEarthquakeName: PropTypes.string
   };
 
   render() {
-    const { earthquake, handleClick } = this.props;
+    const { earthquake, activeEarthquakeName, handleClick } = this.props;
     const { title, magnitude } = earthquake.properties;
     const markClassName = cn(
       'c-map__mark',
       magnitude >= 4.5 ? 'c-map__mark--alert' : '',
-      this.props.$hover ? 'c-map__mark--hover' : ''
+      this.props.$hover ? 'c-map__mark--hover' : '',
+      earthquake.properties.title === activeEarthquakeName ? 'c-map__mark--hover' : ''
     );
     return (
       <img

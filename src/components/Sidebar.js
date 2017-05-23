@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 class Sidebar extends Component {
   static propTypes = {
     earthquakes: PropTypes.array,
     significantEarthQuakes: PropTypes.array,
-    handleClick: PropTypes.func
+    handleClick: PropTypes.func,
+    activeEarthquakeName: PropTypes.string
   };
 
   renderSidebarItems() {
-    const {earthquakes, handleClick} = this.props;
+    const {earthquakes, handleClick, activeEarthquakeName} = this.props;
     return earthquakes.map((earthquake, index) => {
+      const sidebarItemClassName = cn(
+        'list-group-item',
+        'list-group-item-action',
+        'u-flex',
+        'u-flex-center',
+        earthquake.properties.title === activeEarthquakeName ? 'active' : ''
+      );
       return (
         <a href="#"
           key={index}
-          className="list-group-item list-group-item-action u-flex u-flex-center"
+          className={sidebarItemClassName}
           onClick={(ev) => handleClick(ev, earthquake)}
         >
           <h4 className="col-md-3 u-txt-align-center">

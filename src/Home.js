@@ -44,7 +44,7 @@ class Home extends Component {
         lat: 0,
         lng: 0
       },
-      activeEarthquake: null
+      activeEarthquakeName: null
     }
   }
 
@@ -55,13 +55,13 @@ class Home extends Component {
         lat: earthquake.geometry.coordinates[1],
         lng: earthquake.geometry.coordinates[0]
       },
-      activeEarthquake: earthquake.properties.title
+      activeEarthquakeName: earthquake.properties.title
     })
   }
 
   render() {
     const { data } = this.props.data;
-    const { center, activeEarthquake } = this.state;
+    const { center, activeEarthquakeName } = this.state;
 
     if (!data.features) {
       return null;
@@ -82,13 +82,13 @@ class Home extends Component {
         <Sidebar
           earthquakes={lastEarthquakes}
           significantEarthQuakes={significantEarthQuakes}
-          activeEarthquake={activeEarthquake}
+          activeEarthquakeName={activeEarthquakeName}
           handleClick={this.handleClick.bind(this)}
         />
         <Map
           earthquakes={lastEarthquakes}
           center={center}
-          activeEarthquake={activeEarthquake}
+          activeEarthquakeName={activeEarthquakeName}
           handleClick={this.handleClick.bind(this)}
         />
       </section>
