@@ -6,25 +6,34 @@ import store from './store';
 
 import MapMark from './components/MapMark';
 
-const isToday = (date) => {
+const MAX = 20;
+
+const isInPast24Hours = (date) => {
   const today = new Date();
   const currentDate = new Date(date);
   const yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
   return (currentDate >= yesterday && currentDate < today);
 }
 
+const sortByDate = (a, b) => {
+  a = new Date(a.properties.time);
+  b = new Date(b.properties.time);
+  return a > b ? -1 : a < b ? 1 : 0;
+}
+
 const getEarthquakes = (earthquakes, filter) => {
+  earthquakes.sort(sortByDate);
   switch (filter) {
-    case 'SHOW_ALL':
-      return earthquakes;
     case 'SHOW_LAST':
       return earthquakes
-             .filter(e => isToday(e.properties.time));
+             .filter(e => e.properties.mag >= 2.5)
+             .slice(0, MAX);
     case 'SHOW_LAST_SIGNIFICANT':
       return earthquakes
-             .filter(e => isToday(e.properties.time) && e.properties.mag >= 4.5);
+             .filter(e => e.properties.mag >= 4.5)
+             .slice(0, MAX);
     default:
-      return earthquakes;
+      return earthquakes.slice(0, MAX);
   }
 }
 
@@ -71,9 +80,7 @@ class Home extends Component {
               {earthquake.properties.place}
             </h5>
             <p>
-              {(new Date(earthquake.properties.time)).toDateString()}
-              <br/>
-              {(new Date(earthquake.properties.time)).toLocaleTimeString()}
+              {(new Date(earthquake.properties.time)).toUTCString()}
             </p>
             <small>
               {`${earthquake.geometry.coordinates[2]}km`}
@@ -89,7 +96,7 @@ class Home extends Component {
       <div className="c-sidebar list-group">
         <div className="list-group-item">
           <h3 className="list-group-item-heading">
-            Today's earthquakes.
+            Lasts earthquakes.
           </h3>
           <p className="list-group-item-text">
             {`${significantEarthQuakes.length}
@@ -144,7 +151,7 @@ class Home extends Component {
     );
 
     const significantEarthQuakes = getEarthquakes(
-      data.features,
+      lastEarthquakes,
       'SHOW_LAST_SIGNIFICANT'
     );
 

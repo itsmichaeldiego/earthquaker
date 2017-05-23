@@ -6,7 +6,6 @@ class MapMark extends Component {
     const { text, magnitude } = this.props;
     const markClassName = cn(
       'c-map__mark',
-      magnitude >= 2.5 && magnitude < 4.5 ? 'c-map__mark--warning' : '',
       magnitude >= 4.5 ? 'c-map__mark--alert' : ''
     );
     return (
