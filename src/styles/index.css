@@ -5,6 +5,9 @@
 @import './settings/colors.css';
 @import './settings/variables.css';
 
+/* Elements */
+@import './elements/page.css';
+
 /* Components */
 @import './components/header.css';
 @import './components/home.css';
