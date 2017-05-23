@@ -8,6 +8,13 @@
   height: var(--mark-width);
   border-radius: 100%;
   background-color: var(--color-white);
+  left: calc((var(--mark-width) * -1) / 2);
+  top: calc((var(--mark-width) * -1) / 2);
+}
+
+.c-map__mark--hover {
+  background-color: var(--color-green) !important;
+  cursor: pointer;
 }
 
 .c-map__mark--alert {
