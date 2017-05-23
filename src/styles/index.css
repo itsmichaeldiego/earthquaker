@@ -2,6 +2,7 @@
 @import '~bootstrap/dist/css/bootstrap-theme.css';
 
 /* Settings */
+@import './settings/colors.css';
 @import './settings/variables.css';
 
 /* Components */
