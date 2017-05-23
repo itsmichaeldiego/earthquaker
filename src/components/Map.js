@@ -8,12 +8,11 @@ class Map extends Component {
   static propTypes = {
     handleClick: PropTypes.func,
     earthquakes: PropTypes.array,
-    center: PropTypes.object,
-    activeEarthquakeName: PropTypes.string
+    center: PropTypes.object
   };
 
   renderMarkers(earthquakes) {
-    const { handleClick, activeEarthquakeName } = this.props;
+    const { handleClick } = this.props;
     return earthquakes.map(function(earthquake, index) {
       return (
         <MapMark
@@ -21,7 +20,6 @@ class Map extends Component {
           lat={earthquake.geometry.coordinates[1]}
           lng={earthquake.geometry.coordinates[0]}
           earthquake={earthquake}
-          activeEarthquakeName={activeEarthquakeName}
           handleClick={handleClick}
         />
       )

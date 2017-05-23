@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+
+import store from '../store';
+
+const mapStateToProps = (state, params) => {
+  return {
+    selectedEarthquake: store.getState().earthquakes.selectedEarthquake
+  };
+};
 
 class MapMark extends Component {
   static propTypes = {
     // GoogleMap pass $hover props to hovered components
     $hover: PropTypes.bool,
     earthquake: PropTypes.object,
-    activeEarthquakeName: PropTypes.string
-  };
+    selectedEarthquake: PropTypes.object
+  }
+
+  isSelected(earthquake) {
+    const { selectedEarthquake } = this.props;
+    if (!selectedEarthquake.properties) {
+      return false;
+    }
+    return earthquake.id === selectedEarthquake.id;
+  }
 
   render() {
-    const { earthquake, activeEarthquakeName, handleClick } = this.props;
+    const { earthquake, handleClick } = this.props;
     const { title, magnitude } = earthquake.properties;
-    const isActive = earthquake.properties.title === activeEarthquakeName;
+    const isActive = this.isSelected(earthquake);
     const markClassName = cn(
       'c-map__mark',
       magnitude >= 4.5 ? 'c-map__mark--alert' : '',
@@ -35,4 +53,5 @@ class MapMark extends Component {
   }
 }
 
-export default MapMark;
+const ConnectMapMark = connect(mapStateToProps)(MapMark);
+export default ConnectMapMark;
