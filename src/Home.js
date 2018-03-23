@@ -74,8 +74,6 @@ class Home extends Component {
       'SHOW_LAST'
     );
 
-    console.log(lastEarthquakes);
-
     const significantEarthQuakes = getEarthquakes(
       lastEarthquakes,
       'SHOW_LAST_SIGNIFICANT'
